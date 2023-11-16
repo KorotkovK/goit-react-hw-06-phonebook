@@ -1,37 +1,18 @@
-// App.js
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact, deleteContact, updateFilter } from './ContactsSlice/contactsSlice';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
+import { ContactForm } from './ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
+import { AppWrap, TitleApp, TitleContactList } from './App.styled';
+import { Toaster } from 'react-hot-toast';
 
-const App = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts);
-  const filter = useSelector((state) => state.filter);
-
-  const addContactHandler = (contact) => {
-    dispatch(addContact(contact));
-  };
-
-  const deleteContactHandler = (contactId) => {
-    dispatch(deleteContact(contactId));
-  };
-
-  const updateFilterHandler = (filter) => {
-    dispatch(updateFilter(filter));
-  };
-
+export const App = () => {
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm onAddContact={addContactHandler} />
-      <h2>Contacts</h2>
-      <Filter filter={filter} onFilterChange={updateFilterHandler} />
-      <ContactList contacts={contacts} onDeleteContact={deleteContactHandler} />
-    </div>
+    <AppWrap>
+      <TitleApp>Phonebook</TitleApp>
+      <ContactForm />
+      <TitleContactList>Contacts</TitleContactList>
+      <Filter />
+      <ContactList />
+      <Toaster />
+    </AppWrap>
   );
 };
-
-export default App;
